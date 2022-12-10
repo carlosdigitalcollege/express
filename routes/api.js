@@ -21,6 +21,7 @@ router.post('/users', (req, res) => {
   const { name, email, password } = req.body
 
   userModel.add(req.body, (result) => {
+    res.status(201);
     res.end(JSON.stringify(result[0]));
   })
 })

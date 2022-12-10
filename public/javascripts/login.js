@@ -13,6 +13,12 @@ form.addEventListener('submit', (event) => {
     body: JSON.stringify(formDataJSON),
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('token')
     },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    localStorage.setItem('token', data.token)
+    window.location.href = '/admin'
   })
 })
