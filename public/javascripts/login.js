@@ -14,5 +14,11 @@ form.addEventListener('submit', (event) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
+  }).then(response => response.json())
+    .then(data => {
+      if (data.token) {
+        localStorage.setItem('token', data.token)
+        window.location.href = '/'
+      }
+    })
 })
