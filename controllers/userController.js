@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/user')
+
 const auth = (req, res) => {
     const { email, password } = req.body
     userModel.findUserByEmailAndPassword(email, password, (result) => {
@@ -26,8 +29,6 @@ const create = (req, res) => {
         res.end(JSON.stringify(result[0]));
     })
 }
-
-
 
 module.exports = {
     auth,
