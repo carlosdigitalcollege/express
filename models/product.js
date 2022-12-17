@@ -24,7 +24,7 @@ const add = (product, onSuccess) => {
                 '${description}',
                 '${sku}',
                 '${category}',
-                '${price}',
+                '${price}'
            );
         `,
         onSuccess
@@ -32,6 +32,15 @@ const add = (product, onSuccess) => {
 }
 
 
+const getAll = (onSuccess) => {
+    executeQuery(
+        'SELECT name, sku FROM product',
+        onSuccess
+    )
+}
+
+
 module.exports = {
     add,
+    getAll,
 }

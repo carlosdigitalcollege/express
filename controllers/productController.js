@@ -8,7 +8,13 @@ const create = (req, res) => {
   })
 }
 
+const list = (_, res) => {
+  productModel.getAll((result) => {
+    res.end(JSON.stringify(result));
+  })
+}
+
 module.exports = {
-    auth,
     create,
+    list,
 }
