@@ -1,39 +1,27 @@
-const { getDatabaseConnection } = require("../utils/database");
+const { getDatabaseConnection, executeQuery } = require("../utils/database");
 
 const add = (user, onSuccess) => {
     const { name, email, password } = user;
 
-    const connection = getDatabaseConnection();
-
-    connection.connect(function (err) {
-        if (err) throw err;
-        connection.query(`
+    executeQuery(
+        `
             INSERT INTO user (name, email, password)
             VALUES ('${name}', '${email}', '${password}');
-        `, function (err, result) {
-            if (err) throw err;
-            connection.end();
-            onSuccess(result)
-        });
-    });
+        `,
+        onSuccess
+    )
 }
 
 const findUserByEmailAndPassword = (email, password, onSuccess) => {
-    const connection = getDatabaseConnection();
-
-    connection.connect(function (err) {
-        if (err) throw err;
-        connection.query(`
+    executeQuery(
+        `
             SELECT name, email FROM user
             WHERE email = '${email}'
             AND password = '${password}';
-        `, function (err, result) {
-            if (err) throw err;
-            connection.end();
-            onSuccess(result)
-        });
-    });
-} 
+        `,
+        onSuccess
+    )
+}
 
 
 module.exports = {
